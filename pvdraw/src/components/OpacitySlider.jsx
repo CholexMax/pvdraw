@@ -11,13 +11,8 @@ export default function OpacitySlider() {
   let activate=(e) => 
     { 
       setIntial(e.target.value)
-      console.log("event staed eiher change or click");
-      let activateOnmousemove=() => {
-        let totalpercentageMove=intial/100*100
-        elementRef.current.style.left=`${totalpercentageMove}px`
-        console.log("mouse is moved");
-      }
-      rangeRef.current.addEventListener("mousemove",activateOnmousemove)
+      let totalpercentageMove=intial/100*100
+      elementRef.current.style.left=`${totalpercentageMove}px`
     }
   return (
     <div className='grid p-2'>

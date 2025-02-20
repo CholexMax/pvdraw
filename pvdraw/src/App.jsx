@@ -1,10 +1,18 @@
-
+import DrawingStyle from "./components/DrawingStyle"
+import ToolContainer from "./components/ToolContainer"
 
 function App() {
 
   return (
     <>
-    <h1 className="bg-yellow-200">demo testing setup</h1>
+    <ToolContainer/>
+    <div className="w-[200px] h-72  overflow-y-scroll" style={
+      {
+        scrollbarWidth:"thin"
+      }
+    }>
+    <DrawingStyle/>
+    </div>
     </>
   )
 }

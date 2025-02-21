@@ -3,13 +3,13 @@ import DrawingStyle from "./components/DrawingStyle"
 import ToolContainer from "./components/ToolContainer"
 import { DrawingDataProvider } from "./contexts/Drawing"
 import { StyleProvider } from "./contexts/Style"
-import { toolProvider } from "./contexts/Tool"
+import { ToolProvider } from "./contexts/Tool"
 
 
 function App() {
   
   return (
-    <toolProvider>
+    <ToolProvider>
     <div className="relative">
     <StyleProvider>
   <DrawingDataProvider>
@@ -29,7 +29,7 @@ function App() {
     </div>
     </StyleProvider>
   </div>
-  </toolProvider>
+  </ToolProvider>
   )
 }
 

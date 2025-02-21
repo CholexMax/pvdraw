@@ -3,7 +3,7 @@ import { createContext } from "react";
 let toolSeclection=createContext()
 localStorage.setItem("selectedTool",JSON.stringify([{isActive:true,selction:"Rectangle"}]))
 
-let toolProvider=(props) => {
+let ToolProvider=(props) => {
     const [tool, settool] = useState(JSON.parse(localStorage.getItem("selectedTool")));
     return (
         <toolSeclection.Provider value={{tool,settool}}>
@@ -12,4 +12,4 @@ let toolProvider=(props) => {
     )
 }
 
-export {toolSeclection,toolProvider}
+export {toolSeclection,ToolProvider}

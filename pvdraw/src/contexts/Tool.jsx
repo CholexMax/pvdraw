@@ -1,11 +1,22 @@
 import { createContext } from "react";
 import { useState } from "react";
+import { setLocal } from "../hooks/setLocal";
+import getFromLocal from "../hooks/getfromLocal";
+
 
 let toolSeclection=createContext()
-localStorage.setItem("selectedTool",JSON.stringify([{isActive:true,selction:"Rectangle"}]))
+
+let storedData=getFromLocal("selectedTool")
+if(storedData)
+{
+    console.log("data exist")
+}
+else{
+    setLocal("selectedTool",[{isActive:true,selection:"Circle"}])
+}
 
 let ToolProvider=(props) => {
-    const [tool, settool] = useState(JSON.parse(localStorage.getItem("selectedTool")));
+    const [tool, settool] = useState(storedData);
     return (
         <toolSeclection.Provider value={{tool,settool}}>
             {props.children}

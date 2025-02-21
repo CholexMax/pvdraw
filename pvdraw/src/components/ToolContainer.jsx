@@ -1,10 +1,35 @@
 import ToolIcon from "./Tool";
+import { toolSeclection } from "../contexts/Tool";
+import { useContext, useEffect, useState } from "react";
+import { setLocal } from "../hooks/setLocal";
+
 export default function ToolContainer() {
+
+  const {tool,settool}=useContext(toolSeclection)
+  useEffect(
+  () => {
+  let currentElement=[]
+  toolsElement.forEach(
+    (currentTool) => {
+     if(currentTool.name===tool[0].selection)
+     {
+      currentTool.isActive=tool[0].isActive
+      currentElement.push(currentTool)
+     }
+     else{
+      currentElement.push(currentTool)
+     }
+     }
+     )
+    setToolElement(currentElement)
+    },[tool]   
+  )
+
   const toolIconsAssets = [
     {
       name: "Rectangle",
       icon: "https://cdn-icons-png.flaticon.com/128/9369/9369800.png",
-      isActive:true
+      isActive:false
     },
     {
       name: "Circle",
@@ -52,20 +77,40 @@ export default function ToolContainer() {
       isActive:false
     },
   ];
+
+  let [toolsElement,setToolElement]=useState(toolIconsAssets)
   
   let detect=(e) => {
-    console.log(e.target.id);
-    return e.target.id
+    let updatedToolsElement=[]
+    toolsElement.forEach((tool) =>
+    {
+    if(tool.name===e.target.id)
+    {
+      tool.isActive=true
+      updatedToolsElement.push(tool)
+    }
+    else if(tool.isActive){
+      tool.isActive=false
+      updatedToolsElement.push(tool)
+    }
+  else{
+    updatedToolsElement.push(tool)
   }
-  
-      let ToolIcons=toolIconsAssets.map(
-        (toolinfo,index) => <ToolIcon src={toolinfo.icon} description="icon-image" key={index} detect={detect} id={toolinfo.name} isActive={toolinfo.isActive}/> 
-      )
-      
+    }
+)
+    setToolElement(updatedToolsElement)
+    let currentState=[{isActive:true,selection:e.target.id}]
+    settool(currentState)
+    setLocal("selectedTool",currentState)
+  }
   return (
     <div className="flex justify-center p-2">
         <div className="flex items-center rounded-2xl justify-center p-2 gap-2 bg-gray-100">
-        {ToolIcons}
+        {
+          toolsElement.map(
+            (toolinfo,index) => <ToolIcon src={toolinfo.icon} description="icon-image" key={index} detect={detect} id={toolinfo.name} isActive={toolinfo.isActive}/> 
+          )
+        }
         </div>
     </div>
   )
